@@ -22,7 +22,7 @@ public class Questions {
     // Task 1
     public static int findMax(int[] input) {
         // find the max in the input array
-        int max = Integer.MAX_VALUE;
+        int max = Integer.MIN_VALUE;
         for (int i = 0; i <= input.length; i++) {
             if (input[i] > max) {
                 max = input[i];
@@ -34,9 +34,9 @@ public class Questions {
     // Task 2
     public static int findMin(int[] input) {
         // find the smallest element in the array
-        int min = Integer.MIN_VALUE;
-        for (int i = 0; i <= input.length; i++) {
-            if (input[i] > min) {
+        int min = Integer.MAX_VALUE;
+        for (int i = 0; i <= (input.length - 1); i++) {
+            if (input[i] <  min) {
                 min = input[i];
             }
         }
@@ -58,9 +58,9 @@ public class Questions {
         // find the average of the input
         int sum = 0;
         for (int i = 1; i < input.length; i++) {
-            sum = input[i] - sum;
+            sum = input[i] + sum;
         }
-        int average = sum / (input.length - 1);
+        int average = sum / (input.length);
         return average;
     }
 
@@ -79,12 +79,12 @@ public class Questions {
         ArrayList<String> answer = new ArrayList<>();
 
         for (int i = 1; i <= n; i++) {
-            if (i % 3 == 1) {
-                answer.add("fizz");
-            } else if (i % 5 == 1) {
-                answer.add("buzz");
-            } else if (i % 15 == 1) {
+            if ((i % 5 == 0) && (i % 3 == 0)){
                 answer.add("fizzbuzz");
+            } else if (i % 5 == 0) {
+                answer.add("buzz");
+            } else if (i % 3 == 0) {
+                answer.add("fizz");
             } else {
                 answer.add(Integer.toString(i));
             }
@@ -97,13 +97,13 @@ public class Questions {
         // reverse the number
         // 12345 should become 54321
         // Hint: How would you turn 9 into 95? Not by adding 86
-        int answer = 1;
+        String answer = "";
         while (input != 0) {
             int digit = input % 10;
             answer = answer + digit;
             input = input / 10;
         }
-        return answer;
+        return integer.parseInt(answer);
     }
     
     //EXTRA CREDIT BELOW HERE
@@ -114,15 +114,15 @@ public class Questions {
     public static int binarySearch(int[] input, int target) {
         // look for the index of target in input
         int low = 0;
-        int high = input.length - 1;
-        while (low < high) {
+        int high = input.length;
+        while (low != high) {
             int mid = (low + high) / 2;
             if (input[mid] == target) { // middle element is the target. Success!!!
                 return mid;
-            } else if (input[mid] > target) { // middle element is greater than the target
-                low = mid + 1;
+            } else if (input[mid] <  target) { // middle element is greater than the target
+                low = low + 1;
             } else { // middle element is smaller than the target
-                high = mid - 1;
+                high = high - 1;
             }
         }
         return -1; // element is not found
@@ -198,3 +198,4 @@ public class Questions {
         System.out.println(reverseNumber(54321)); 
     }
 }
+
